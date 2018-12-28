@@ -1,0 +1,112 @@
+<html>
+	<head>
+		<title>jQwery</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<link href="bootstrap.css" rel="stylesheet">
+		<script src="bootstrap.js"></script>
+	</head>
+	<body background="Fon.jpg">
+     <header>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<a class="navbar-brand" href="#">jQwery</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+			</nav>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#" data-toggle="modal" data-target="#myModal">Home</a></li>
+					<li class="breadcrumb-item active" aria-current="page">jQwery</li>
+				</ol>
+			</nav>
+			<div class="modal fade" id="myModal">
+				<div class="modal-dialog" role="document">
+					<div class="card border-success">
+						<div class="card-header bg-success text-white">
+							Eror 404
+						</div>
+						<div class="card-body">
+							<p>Page not found</p>
+							<hr>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="center">
+          <script type="text/javascript">
+              var a = [
+                {
+                  text: 'Животные',
+                  children: [
+                    {
+                      text: 'Млекопитающие',
+                      children: [
+                        'Коровы',
+                        'Ослы',
+                        'Собаки',
+                        'Тигры'
+                      ]
+                    },
+                    {
+                      text: 'Другие',
+                      children: [
+                        'Змеи',
+                        'Птицы',
+                        'Ящерицы'
+                      ]
+                    },
+                    {
+                      text: 'Рыбы',
+                      children: [
+                       {
+                          text: 'Аквариумные',
+                          children: [
+                            'Гуппи',
+                            'Скалярии'
+                          ]
+                        },
+                        {
+                          text: 'Морские',
+                         children: [
+                            'Морская форель'
+                         ]
+                       }
+                     ]
+                   }
+                  ]
+                }
+                ];
+              function trees(children) 
+              {
+                var ul = $('<ul/>')
+      
+                for (var elem of children) 
+                {
+                  var li = $('<li/>')
+                  if (elem.text !== undefined) 
+                    li.append(elem.text)
+                  if (typeof elem !== 'object')
+                    li.append(elem)
+                  else if (elem.children !== undefined) 
+                    li.append(trees(elem.children))
+                  li.on('click', function(b) 
+                  {
+                    b.preventDefault()
+                    $(this.firstElementChild).slideToggle()
+                    console.log(this.firstChild.data, $(this).find("li").length)
+                    return false
+                  })
+                  ul.append(li)
+                }
+                return ul
+              }
+              $("body").append(trees(a))
+            </script>			
+        </div>
+	</body>
+</html>
